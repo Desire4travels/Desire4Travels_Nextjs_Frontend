@@ -249,6 +249,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link href="https://saarthi.desire4travels.com/" className="nav-link" onClick={handleLinkClick}>
+              Saarthi AI
+            </Link>
+          </li>
+          <li>
             <Link href="/destination" className="nav-link" onClick={handleLinkClick}>
               Destinations
             </Link>
@@ -277,6 +282,7 @@ const Navbar = () => {
               Contact Us
             </Link>
           </li>
+          
         </ul>
       </div>
     </div>

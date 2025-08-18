@@ -24,7 +24,7 @@ const TopDestination = () => {
 
   return (
     <div className={styles['topdestination-section']}>
-      <h2 className={styles['topdestination-heading']}>Top Destinations</h2>
+      <h2 className={styles['topdestination-heading']}>Top Destinationss</h2>
       <div className={styles['topdestination-grid']}>
         {destinations.length > 0 ? (
           destinations.map(dest => (
