@@ -278,6 +278,7 @@ const Footer = () => {
             <Link href="/destination" className="text-gray-300 text-sm mb-2 hover:text-white">Destinations</Link>
             <Link href="/package" className="text-gray-300 text-sm mb-2 hover:text-white">Packages</Link>
             <Link href="/activity" className="text-gray-300 text-sm mb-2 hover:text-white">Activities</Link>
+             <Link href="https://saarthi.desire4travels.com/" className="text-gray-300 text-sm mb-2 hover:text-white">Saarthi AI</Link>
           </div>
 
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start">

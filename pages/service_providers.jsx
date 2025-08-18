@@ -54,9 +54,8 @@ const initialFormValues = {
 const ServiceProviders = () => {
   const [selected, setSelected] = useState("hotel");
   const [forms, setForms] = useState(initialFormValues);
-const [successMessage, setSuccessMessage] = useState("");
-const [errorMessage, setErrorMessage] = useState("");
-
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,32 +84,32 @@ const [errorMessage, setErrorMessage] = useState("");
     }
   }
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const formData = forms[selected];
-  const emptyFields = Object.entries(formData).filter(([_, val]) => val.trim() === "");
+    const formData = forms[selected];
+    const emptyFields = Object.entries(formData).filter(
+      ([_, val]) => val.trim() === ""
+    );
 
-  if (emptyFields.length > 0) {
-    setErrorMessage("Please fill all fields before submitting.");
-    setTimeout(() => setErrorMessage(""), 3000);
-    return;
-  }
+    if (emptyFields.length > 0) {
+      setErrorMessage("Please fill all fields before submitting.");
+      setTimeout(() => setErrorMessage(""), 3000);
+      return;
+    }
 
-  try {
-    await saveProvider(selected, formData);
+    try {
+      await saveProvider(selected, formData);
 
-    setSuccessMessage("Form submitted successfully!");
-    setForms(initialFormValues);
+      setSuccessMessage("Form submitted successfully!");
+      setForms(initialFormValues);
 
-    setTimeout(() => setSuccessMessage(""), 3000);
-  } catch (err) {
-    setErrorMessage("Submission failed. Please try again.");
-    setTimeout(() => setErrorMessage(""), 3000);
-  }
-};
-
-
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err) {
+      setErrorMessage("Submission failed. Please try again.");
+      setTimeout(() => setErrorMessage(""), 3000);
+    }
+  };
 
   /** ---------- Render helpers ---------- */
   const renderHotelForm = () => (
@@ -428,59 +427,49 @@ const handleSubmit = async (e) => {
         return null;
     }
   };
-  
 
+  return (
+    <>
+      <header className={styles.customHeader}>
+        <div className={styles.headerContent}>
+          <h4 className={styles.headerTitle}>Partner With Us</h4>
+        </div>
+      </header>
 
+      <div className={styles.container}>
+        <label className={styles.dropdownLabel}>
+          Select provider type&nbsp;
+          <select
+            value={selected}
+            onChange={(e) => setSelected(e.target.value)}
+            className={styles.dropdown}
+          >
+            {Object.entries(providerTypes).map(([key, label]) => (
+              <option key={key} value={key}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
 
-return (
-  <>
-    <header className={styles.customHeader}>
-      <div className={styles.headerContent}>
-        <h4 className={styles.headerTitle}>Partner With Us</h4>
-      </div>
-    </header>
-
-    <div className={styles.container}>
-      
-
-      <label className={styles.dropdownLabel}>
-        Select provider type&nbsp;
-        <select
-          value={selected}
-          onChange={(e) => setSelected(e.target.value)}
-          className={styles.dropdown}
+        <form
+          id="fom"
+          className={`${styles.form} ${styles.card}`}
+          onSubmit={handleSubmit}
         >
-          {Object.entries(providerTypes).map(([key, label]) => (
-            <option key={key} value={key}>
-              {label}
-            </option>
-          ))}
-        </select>
-      </label>
+          {renderForm()}
+          <button type="submit" className={styles.submitButton}>
+            Submit
+          </button>
+        </form>
+      </div>
+      {successMessage && (
+        <div className={styles.centerPopup}>{successMessage}</div>
+      )}
 
-      <form
-        id="fom"
-        className={`${styles.form} ${styles.card}`}
-        onSubmit={handleSubmit}
-      >
-        {renderForm()}
-        <button type="submit" className={styles.submitButton}>
-          Submit
-        </button>
-      </form>
-    </div>
-{successMessage && (
-  <div className={styles.centerPopup}>{successMessage}</div>
-)}
-
-{errorMessage && (
-  <div className={styles.popupError}>{errorMessage}</div>
-)}
-
-
-  </>
-);
-
+      {errorMessage && <div className={styles.popupError}>{errorMessage}</div>}
+    </>
+  );
 };
 
 export default ServiceProviders;
